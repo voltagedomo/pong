@@ -12,9 +12,16 @@ let circleY = 20;
 let ballSpeed = 1;
 let lPaddleX = 25;
 let lPaddleY = 100;
-let rPaddleX = 1260;
-let rPaddleY = innerWidth - 20;
-console.log(innerWidth);
+let rPaddleX = innerWidth - 25;
+let rPaddleY = 100;
+let arrowUpIsPressed = false;
+let arrowdownIsPressed = false;
+let keyWIsPressed = false;
+let keySIsPressed = false;
+
+// add event listeners
+document.addEventListener(`keypress`, keypressHandler);
+
 
 // main function: drawing pong ball and paddles
 requestAnimationFrame(pong);
@@ -35,4 +42,18 @@ function pong() {
     ctx.fillRect(rPaddleX, rPaddleY, 7, 60);
 
     requestAnimationFrame(pong);
+}
+
+// paddle movement based on keypress
+function keypressHandler(event) {
+    console.log(event.code);
+    if (event.code == `KeyW`) {
+        lPaddleY -= 15;
+    } else if (event.code == `KeyS`) {
+        lPaddleY += 15;
+    } else if (event.code == `Numpad8`) {
+        rPaddleY -= 15;
+    } else if (event.code == `Numpad5`) {
+        rPaddleY += 15;
+    }
 }
